@@ -25,12 +25,20 @@
             var ctx = canvas.getContext('2d');
             ctx.fillStyle = '#0ff';
             ctx.fillRect(0, 0, 500, 500);
-            ctx.fillText('hello', 0, 500);
         </script>
     </section>
     <section>
         <address>guangdong province shenzhen city</address>
         <abbr> This is abbr</abbr>
+    </section>
+    <section>
+        <div id="coordinates" style="width: 400px; height: 500px; border: 1px black solid;"
+             onmousemove="cnvs_getCoordinates(envent)"></div>
+        <script type="text/javascript">
+            function cnvs_getCoordinates(e) {
+
+            }
+        </script>
     </section>
 </article>
 </body>

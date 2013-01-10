@@ -1,4 +1,4 @@
-package com.tydic.sps;
+package com.tydic.sps.http;
 
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
