@@ -15,7 +15,7 @@ import java.util.concurrent.Executors;
  */
 public class HelloClient {
     @Test
-    public void startClient(){
+    public void startClient() {
         ClientBootstrap bootstrap = new ClientBootstrap(
                 new NioClientSocketChannelFactory(
                         Executors.newCachedThreadPool(),
