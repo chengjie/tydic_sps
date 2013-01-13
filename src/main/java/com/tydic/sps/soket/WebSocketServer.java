@@ -2,6 +2,9 @@ package com.tydic.sps.soket;
 
 import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
@@ -41,6 +44,7 @@ public class WebSocketServer {
         } else {
             port = 8080;
         }
+        //ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         new WebSocketServer(port).run();
     }
 }

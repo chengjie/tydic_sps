@@ -1,5 +1,6 @@
 package com.tydic.sps.soket;
 
+import com.tydic.sps.action.Home;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.jboss.netty.channel.*;
@@ -10,6 +11,8 @@ import org.jboss.netty.handler.codec.http.websocketx.*;
 import org.jboss.netty.logging.InternalLogger;
 import org.jboss.netty.logging.InternalLoggerFactory;
 import org.jboss.netty.util.CharsetUtil;
+
+import java.lang.reflect.Method;
 
 import static org.jboss.netty.handler.codec.http.HttpHeaders.Names.CONTENT_TYPE;
 import static org.jboss.netty.handler.codec.http.HttpHeaders.Names.HOST;
@@ -47,15 +50,14 @@ public class WebSocketServerHandler extends SimpleChannelUpstreamHandler {
             return;
         }
 
+
         // Send the demo page and favicon.ico
         if (req.getUri().equals("/")) {
             HttpResponse res = new DefaultHttpResponse(HTTP_1_1, OK);
-
-            ChannelBuffer content = WebSocketServerIndexPage.getContent(getWebSocketLocation(req));
-
+//            ChannelBuffer content = WebSocketServerIndexPage.getContent(getWebSocketLocation(req));
+            ChannelBuffer content = Home.home();
             res.setHeader(CONTENT_TYPE, "text/html; charset=UTF-8");
             setContentLength(res, content.readableBytes());
-
             res.setContent(content);
             sendHttpResponse(ctx, req, res);
             return;
@@ -63,9 +65,31 @@ public class WebSocketServerHandler extends SimpleChannelUpstreamHandler {
             HttpResponse res = new DefaultHttpResponse(HTTP_1_1, NOT_FOUND);
             sendHttpResponse(ctx, req, res);
             return;
+        } else {
+            String[] uri = req.getUri().substring(1).split("/");
+            if (uri.length == 2) {
+                HttpResponse res = new DefaultHttpResponse(HTTP_1_1, OK);
+                try {
+                    //反射访问方法
+                    Class<?> newClass = Class.forName("com.tydic.sps.action." + uri[0]);
+                    Method method = newClass.getMethod(uri[1]);
+                    ChannelBuffer content = (ChannelBuffer) method.invoke(newClass);
+                    res.setHeader(CONTENT_TYPE, "text/html; charset=UTF-8");
+                    setContentLength(res, content.readableBytes());
+                    res.setContent(content);
+                    sendHttpResponse(ctx, req, res);
+                } catch (Exception e) {
+                    //返回404
+                    sendHttpResponse(ctx, req, new DefaultHttpResponse(HTTP_1_1, NOT_FOUND));
+                }
+            } else {
+                //返回404
+                sendHttpResponse(ctx, req, new DefaultHttpResponse(HTTP_1_1, NOT_FOUND));
+            }
+            return;
         }
 
-        // Handshake
+/*        // Handshake
         WebSocketServerHandshakerFactory wsFactory = new WebSocketServerHandshakerFactory(
                 getWebSocketLocation(req), null, false);
         handshaker = wsFactory.newHandshaker(req);
@@ -73,11 +97,12 @@ public class WebSocketServerHandler extends SimpleChannelUpstreamHandler {
             wsFactory.sendUnsupportedWebSocketVersionResponse(ctx.getChannel());
         } else {
             handshaker.handshake(ctx.getChannel(), req).addListener(WebSocketServerHandshaker.HANDSHAKE_LISTENER);
-        }
+        }*/
     }
 
     /**
      * soket请求
+     *
      * @param ctx
      * @param frame
      */
@@ -92,7 +117,7 @@ public class WebSocketServerHandler extends SimpleChannelUpstreamHandler {
             return;
         } else if (!(frame instanceof TextWebSocketFrame)) {
             throw new UnsupportedOperationException(String.format("%s frame types not supported", frame.getClass()
-                     .getName()));
+                    .getName()));
         }
 
         // Send the uppercase string back.
