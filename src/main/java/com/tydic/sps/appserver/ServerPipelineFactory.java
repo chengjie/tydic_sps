@@ -14,14 +14,14 @@ import static org.jboss.netty.channel.Channels.pipeline;
  * Date: 13-1-10
  * Time: 下午2:44
  */
-public class WebSocketServerPipelineFactory implements ChannelPipelineFactory {
+public class ServerPipelineFactory implements ChannelPipelineFactory {
     public ChannelPipeline getPipeline() throws Exception {
         // Create a default pipeline implementation.
         ChannelPipeline pipeline = pipeline();
         pipeline.addLast("decoder", new HttpRequestDecoder());
         pipeline.addLast("aggregator", new HttpChunkAggregator(65536));
         pipeline.addLast("encoder", new HttpResponseEncoder());
-        pipeline.addLast("handler", new HttpStaticFileServerHandler());
+        pipeline.addLast("handler", new ServerHandler());
         return pipeline;
     }
 }

@@ -7,31 +7,31 @@ import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
 
 /**
+ * Web socket服务器管理
  * Created with IntelliJ IDEA.
  * User: chengjie
  * Date: 13-1-10
  * Time: 下午2:42
  */
-public class WebSocketServer {
+public class AppServer {
     private final int port;
 
-    public WebSocketServer(int port) {
+    public AppServer(int port) {
         this.port = port;
     }
 
     public void run() {
-        // Configure the server.
+        // 配置服务
         ServerBootstrap bootstrap = new ServerBootstrap(new NioServerSocketChannelFactory(
                 Executors.newCachedThreadPool(), Executors.newCachedThreadPool()));
 
-        // Set up the event pipeline factory.
-        bootstrap.setPipelineFactory(new WebSocketServerPipelineFactory());
+        // 设置 pipeline factory.
+        bootstrap.setPipelineFactory(new ServerPipelineFactory());
 
-        // Bind and start to accept incoming connections.
+        // 绑定连接
         bootstrap.bind(new InetSocketAddress(port));
 
-        System.out.println("Web socket server started at port " + port + '.');
-        System.out.println("Open your browser and navigate to http://localhost:" + port + '/');
+        System.out.println("打开浏览器访问 http://localhost:" + port + '/');
     }
 
     public static void main(String[] args) {
@@ -41,7 +41,6 @@ public class WebSocketServer {
         } else {
             port = 8080;
         }
-        //ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
-        new WebSocketServer(port).run();
+        new AppServer(port).run();
     }
 }

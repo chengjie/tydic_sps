@@ -179,7 +179,7 @@ public class HttpStaticFileServerHandler extends SimpleChannelUpstreamHandler {
         }
 
         // Convert to absolute path.
-        return System.getProperty("user.dir") + File.separator + uri;
+        return ClassLoader.getSystemResource("").getFile() +"WEB"+  uri;
     }
 
     private static void sendError(ChannelHandlerContext ctx, HttpResponseStatus status) {
