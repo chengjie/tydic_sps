@@ -1,6 +1,6 @@
-package com.tydic.sps.soket;
+package com.tydic.sps.appserver;
 
-import com.tydic.sps.action.Home;
+import com.tydic.sps.document.action.Home;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.jboss.netty.channel.*;
@@ -71,7 +71,7 @@ public class WebSocketServerHandler extends SimpleChannelUpstreamHandler {
                 HttpResponse res = new DefaultHttpResponse(HTTP_1_1, OK);
                 try {
                     //反射访问方法
-                    Class<?> newClass = Class.forName("com.tydic.sps.action." + uri[0]);
+                    Class<?> newClass = Class.forName("com.tydic.sps.document.action." + uri[0]);
                     Method method = newClass.getMethod(uri[1]);
                     ChannelBuffer content = (ChannelBuffer) method.invoke(newClass);
                     res.setHeader(CONTENT_TYPE, "text/html; charset=UTF-8");

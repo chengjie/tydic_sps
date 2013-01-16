@@ -1,4 +1,4 @@
-package com.tydic.sps.soket;
+package com.tydic.sps.appserver;
 
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;

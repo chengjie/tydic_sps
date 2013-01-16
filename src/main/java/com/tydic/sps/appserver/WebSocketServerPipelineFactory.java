@@ -1,4 +1,4 @@
-package com.tydic.sps.soket;
+package com.tydic.sps.appserver;
 
 import org.jboss.netty.channel.ChannelPipeline;
 import org.jboss.netty.channel.ChannelPipelineFactory;
@@ -21,7 +21,7 @@ public class WebSocketServerPipelineFactory implements ChannelPipelineFactory {
         pipeline.addLast("decoder", new HttpRequestDecoder());
         pipeline.addLast("aggregator", new HttpChunkAggregator(65536));
         pipeline.addLast("encoder", new HttpResponseEncoder());
-        pipeline.addLast("handler", new WebSocketServerHandler());
+        pipeline.addLast("handler", new HttpStaticFileServerHandler());
         return pipeline;
     }
 }

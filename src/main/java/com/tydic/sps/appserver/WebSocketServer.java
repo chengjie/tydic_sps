@@ -1,10 +1,7 @@
-package com.tydic.sps.soket;
+package com.tydic.sps.appserver;
 
 import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;

@@ -1,11 +1,12 @@
-package com.tydic.sps.appserver;
+package com.tydic.sps.http;
 
 /**
  * Created with IntelliJ IDEA.
  * User: chengjie
- * Date: 13-1-10
- * Time: 上午10:59
+ * Date: 13-1-16
+ * Time: 下午8:28
  * To change this template use File | Settings | File Templates.
  */
-public class WebSocketSslServerHandler {
+public class HttpStaticResources {
+
 }
