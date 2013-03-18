@@ -25,7 +25,7 @@ public class HandleWebSocketFrame {
     private static WebSocketServerHandshaker handshaker;
 
     /**
-     * soket请求
+     * soket请求业务逻辑处理
      *
      * @param ctx
      * @param e
@@ -48,6 +48,7 @@ public class HandleWebSocketFrame {
         if (logger.isDebugEnabled()) {
             logger.debug(String.format("Channel %s received %s", ctx.getChannel().getId(), request));
         }
+
         ctx.getChannel().write(new TextWebSocketFrame(request.toUpperCase()));
     }
 

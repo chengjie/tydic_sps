@@ -36,7 +36,7 @@ public class HttpStaticResources {
     public static final int HTTP_CACHE_SECONDS = 60;
 
     public static void httpStaticResources(ChannelHandlerContext ctx, MessageEvent e) throws ParseException, IOException {
-        HttpRequest request = (HttpRequest)e.getMessage();
+        HttpRequest request = (HttpRequest) e.getMessage();
         final String path = sanitizeUri(request.getUri());
         if (path == null) {
             HttpUtil.sendHttpResponse(ctx, request, new DefaultHttpResponse(HTTP_1_1, FORBIDDEN));
@@ -119,7 +119,7 @@ public class HttpStaticResources {
 
     private static String sanitizeUri(String uri) {
         // Decode the path.
-        uri = uri.equals("/")?uri+"index.html":uri;
+        uri = uri.equals("/") ? uri + "index.html" : uri;
         try {
             uri = URLDecoder.decode(uri, "UTF-8");
         } catch (UnsupportedEncodingException e) {
@@ -201,6 +201,15 @@ public class HttpStaticResources {
      */
     private static void setContentTypeHeader(HttpResponse response, File file) {
         MimetypesFileTypeMap mimeTypesMap = new MimetypesFileTypeMap();
+        String path = file.getPath();
+        if (path.substring(path.lastIndexOf(".")).equals(".css")) {
+            response.setHeader(CONTENT_TYPE, "text/css");
+            return;
+        }
+        if (path.substring(path.lastIndexOf(".")).equals(".js")) {
+            response.setHeader(CONTENT_TYPE, "text/javascript");
+            return;
+        }
         response.setHeader(CONTENT_TYPE, mimeTypesMap.getContentType(file.getPath()));
     }
 

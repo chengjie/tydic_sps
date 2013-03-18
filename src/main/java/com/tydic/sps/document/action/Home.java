@@ -1,8 +1,11 @@
 package com.tydic.sps.document.action;
 
+import com.tydic.sps.appserver.WebSocketServerIndexPage;
+import com.tydic.sps.mapper.UserMapper;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.jboss.netty.util.CharsetUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.*;
 
@@ -14,15 +17,17 @@ import java.io.*;
  * To change this template use File | Settings | File Templates.
  */
 public class Home {
+
     public static ChannelBuffer home() {
-        return ChannelBuffers.copiedBuffer("" +
+        /*return ChannelBuffers.copiedBuffer("" +
                 "<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"default.css\" ><title>接口列表</title></head><body>" +
                 "<article>" +
-                "<section>" +
+                "<section>" + "</section>"+
                 "</article>" +
                 "<header><h2>接口列表</h2></header>" +
                 "</body></html>"
-                , CharsetUtil.UTF_8);
+                , CharsetUtil.UTF_8);*/
+        return WebSocketServerIndexPage.getContent("ws://localhost:8080/websocket");
     }
 
     public static ChannelBuffer hello() {
