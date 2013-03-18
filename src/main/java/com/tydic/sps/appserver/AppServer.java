@@ -3,6 +3,7 @@ package com.tydic.sps.appserver;
 import com.tydic.sps.domain.User;
 import com.tydic.sps.mapper.UserMapper;
 import com.tydic.sps.service.UserService;
+import com.tydic.sps.spring.ApplicationInit;
 import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 import org.springframework.context.ApplicationContext;
@@ -46,14 +47,16 @@ public class AppServer {
         } else {
             port = 8080;
         }
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        //ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+
+        ApplicationInit.context();
         try {
-            UserMapper userMapper = (UserMapper) ctx.getBean("userMapper");
+            /*UserMapper userMapper = (UserMapper) ctx.getBean("userMapper");
             User user = userMapper.findUserById(1);
             System.out.println(user.getUsername());
             UserService userService = (UserService) ctx.getBean("userService");
             userService.findUserById(1);
-            System.out.println(user.getUsername());
+            System.out.println(user.getUsername());*/
         } catch (Exception e) {
             System.out.println(e);
         }

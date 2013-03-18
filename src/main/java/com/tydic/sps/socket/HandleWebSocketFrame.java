@@ -1,5 +1,6 @@
 package com.tydic.sps.socket;
 
+import com.tydic.sps.service.UserService;
 import com.tydic.sps.util.HttpUtil;
 import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.channel.ExceptionEvent;
@@ -8,6 +9,7 @@ import org.jboss.netty.handler.codec.http.HttpRequest;
 import org.jboss.netty.handler.codec.http.websocketx.*;
 import org.jboss.netty.logging.InternalLogger;
 import org.jboss.netty.logging.InternalLoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.jboss.netty.handler.codec.http.HttpHeaders.Names.HOST;
 
@@ -23,6 +25,7 @@ public class HandleWebSocketFrame {
     private static final InternalLogger logger = InternalLoggerFactory.getInstance(HandleWebSocketFrame.class);
 
     private static WebSocketServerHandshaker handshaker;
+
 
     /**
      * soket请求业务逻辑处理
@@ -45,10 +48,11 @@ public class HandleWebSocketFrame {
         }
         // Send the uppercase string back.
         String request = ((TextWebSocketFrame) frame).getText();
-        if (logger.isDebugEnabled()) {
-            logger.debug(String.format("Channel %s received %s", ctx.getChannel().getId(), request));
-        }
+//        if (logger.isDebugEnabled()) {
+            logger.info(String.format("Channel %s received %s", ctx.getChannel().getId(), request));
+//        }
 
+//        ctx.getChannel().write(new TextWebSocketFrame("nihaoasdfasdf"));
         ctx.getChannel().write(new TextWebSocketFrame(request.toUpperCase()));
     }
 

@@ -45,7 +45,7 @@ public class HandleHttpRequest {
             return;
         }
         //判断访问路径是否是socket路径，如果是则开启socket
-        if (req.getUri().equals("/websocket")) {
+        if (req.getUri().startsWith("/websocket")) {
             // Handshake
             WebSocketServerHandshakerFactory wsFactory = new WebSocketServerHandshakerFactory(
                     getWebSocketLocation(req), null, false);
@@ -91,6 +91,6 @@ public class HandleHttpRequest {
     }
 
     private static String getWebSocketLocation(HttpRequest req) {
-        return "ws://" + req.getHeader(HOST) + WEBSOCKET_PATH;
+        return "ws://" + req.getHeader(HOST) + req.getUri();//WEBSOCKET_PATH;
     }
 }

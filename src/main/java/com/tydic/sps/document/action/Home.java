@@ -27,7 +27,7 @@ public class Home {
                 "<header><h2>接口列表</h2></header>" +
                 "</body></html>"
                 , CharsetUtil.UTF_8);*/
-        return WebSocketServerIndexPage.getContent("ws://localhost:8080/websocket");
+        return WebSocketServerIndexPage.getContent("ws://localhost:8080/websocket/web");
     }
 
     public static ChannelBuffer hello() {
