@@ -1,4 +1,7 @@
 /*n你好*/
 body{
-    background-color: black;
+}
+.cor{
+    color: yellow;
+    font-size: 80px;
 }

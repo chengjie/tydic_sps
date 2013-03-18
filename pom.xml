@@ -106,7 +106,26 @@
             <artifactId>mybatis-spring</artifactId>
             <version>1.1.1</version>
         </dependency>
-
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>oracle</groupId>
+            <artifactId>ojdbc</artifactId>
+            <version>14_10g</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.7-beta3</version>
+        </dependency>
     </dependencies>
     <properties>
         <springframework.version>3.2.0.RELEASE</springframework.version>

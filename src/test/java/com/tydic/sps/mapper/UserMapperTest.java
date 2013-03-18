@@ -1,11 +1,14 @@
 package com.tydic.sps.mapper;
 
 import com.tydic.sps.domain.User;
+import com.tydic.sps.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.annotation.Resource;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,13 +20,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
 public class UserMapperTest {
-    @Autowired
+    @Resource
     UserMapper userMapper;
+    @Resource
+    UserService userService;
 
     @Test
     public void testFindUserById() throws Exception {
         System.out.println("hello test");
-        User user = userMapper.findUserById(1);
+        User user = userService.findUserById(1);
         System.out.println(user.getUsername());
 
     }
