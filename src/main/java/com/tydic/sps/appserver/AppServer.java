@@ -1,13 +1,7 @@
 package com.tydic.sps.appserver;
 
-import com.tydic.sps.domain.User;
-import com.tydic.sps.mapper.UserMapper;
-import com.tydic.sps.service.UserService;
-import com.tydic.sps.spring.ApplicationInit;
 import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
@@ -49,7 +43,7 @@ public class AppServer {
         }
         //ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
 
-        ApplicationInit.context();
+        //ApplicationInit.context();
         try {
             /*UserMapper userMapper = (UserMapper) ctx.getBean("userMapper");
             User user = userMapper.findUserById(1);
